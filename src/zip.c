@@ -885,7 +885,7 @@ int zip_is64(struct zip_t *zip) {
   return (int)zip->archive.m_pState->m_zip64;
 }
 
-int zip_entry_open(struct zip_t *zip, const char *entryname) {
+int zip_entry_open(struct zip_t *zip, const char *entryname, long long int mtime) {
   size_t entrylen = 0;
   mz_zip_archive *pzip = NULL;
   mz_uint num_alignment_padding_bytes, level;
@@ -1005,7 +1005,7 @@ int zip_entry_open(struct zip_t *zip, const char *entryname) {
   }
   local_dir_header_ofs += num_alignment_padding_bytes;
 
-  zip->entry.m_time = time(NULL);
+  zip->entry.m_time = (mtime < 0) ? time(NULL) : mtime;
 #ifndef MINIZ_NO_TIME
   mz_zip_time_t_to_dos_time(zip->entry.m_time, &dos_time, &dos_date);
 #endif
