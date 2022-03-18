@@ -157,7 +157,8 @@ extern ZIP_EXPORT int zip_is64(struct zip_t *zip);
  *
  * @return the return code - 0 on success, negative number (< 0) on error.
  */
-extern ZIP_EXPORT int zip_entry_open(struct zip_t *zip, const char *entryname, long long int mtime);
+extern ZIP_EXPORT int zip_entry_open(struct zip_t *zip, const char *entryname);
+extern ZIP_EXPORT int zip_entry_open3(struct zip_t *zip, const char *entryname, long long int mtime);
 
 /**
  * Opens a new entry by index in the zip archive.
